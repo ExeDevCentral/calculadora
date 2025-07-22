@@ -41,4 +41,4 @@ Permite realizar operaciones matemáticas básicas como suma, resta, multiplicac
 ---
 
 ## **Autor**
-Desarrollado por **[Tu Nombre]** – *Practicando JavaScript y desarrollo web*.
+Desarrollado por Exequiel Echevarria – *Practicando JavaScript y desarrollo web*.
