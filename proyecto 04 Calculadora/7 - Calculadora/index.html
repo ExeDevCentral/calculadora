@@ -1,35 +1,91 @@
 <!DOCTYPE html>
-    <head>
-        <title>Calculadora</title>
-        <link rel="stylesheet" href="calculadora.css">
-        <script src="calculadora.js"></script>
-    </head>
-    <body>
-        <h1>Calculadora</h1>
-        <input type="text" id="campo1">        
-        <input type="text" id="campo2">
-        <br/>
-        <br/>
-        <button onclick="suma()">+</button>
-        <button onclick="resta()">-</button>        
-        <button onclick="multiplicacion()">x</button>               
-        <button onclick="division()">/</button>
-        <br/>
-        <div class="doble">
-            <button onclick="raiz()">raiz</button>
-            <button onclick="potencia()">potencia</button>
-            <br/>        
-            <button onclick="absoluto()">absoluto</button>                
-            <button onclick="aleatorio()">random</button>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Inteligente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="calculadora.css">
+    <script src="calculadora.js" defer></script>
+</head>
+<body>
+    <main class="calc-wrapper">
+        <div class="calculator-card" id="calcCard">
+            <header class="calc-header">
+                <div class="calc-title-row">
+                    <h1>Calculadora</h1>
+                    <button type="button" class="mode-toggle-btn" id="modeBtn" onclick="toggleCalcMode()">
+                        <span id="modeLabel">Avanzada</span>
+                    </button>
+                </div>
+                <p class="calc-subtitle">Diseño responsivo para móviles y tablets</p>
+            </header>
+
+            <section class="display-section">
+                <div class="inputs-grid">
+                    <div class="input-group">
+                        <label for="campo1">Operando A</label>
+                        <input type="number" id="campo1" placeholder="0" inputmode="decimal">
+                    </div>
+                    <div class="input-group">
+                        <label for="campo2">Operando B</label>
+                        <input type="number" id="campo2" placeholder="0" inputmode="decimal">
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <span class="result-label">Resultado</span>
+                    <input type="text" id="resultado" readonly placeholder="0">
+                </div>
+            </section>
+
+            <!-- Operaciones Básicas -->
+            <section class="keypad-grid basic-ops">
+                <button type="button" class="btn btn-op" onclick="suma()" aria-label="Sumar">+</button>
+                <button type="button" class="btn btn-op" onclick="resta()" aria-label="Restar">-</button>
+                <button type="button" class="btn btn-op" onclick="multiplicacion()" aria-label="Multiplicar">×</button>
+                <button type="button" class="btn btn-op" onclick="division()" aria-label="Dividir">÷</button>
+            </section>
+
+            <!-- Operaciones Científicas / Avanzadas (Colapsable en móvil) -->
+            <section class="advanced-ops" id="advancedSection">
+                <div class="section-divider">
+                    <span>Funciones Matemáticas</span>
+                </div>
+                <div class="keypad-grid adv-grid">
+                    <button type="button" class="btn btn-fn" onclick="raiz()">√ (B)</button>
+                    <button type="button" class="btn btn-fn" onclick="potencia()">A ^ B</button>
+                    <button type="button" class="btn btn-fn" onclick="absoluto()">|B|</button>
+                    <button type="button" class="btn btn-fn" onclick="aleatorio()">Random</button>
+                </div>
+
+                <div class="section-divider">
+                    <span>Redondeo de Resultado</span>
+                </div>
+                <div class="keypad-grid round-grid">
+                    <button type="button" class="btn btn-round" onclick="redondeo()">Round</button>
+                    <button type="button" class="btn btn-round" onclick="piso()">Floor</button>
+                    <button type="button" class="btn btn-round" onclick="techo()">Ceil</button>
+                </div>
+            </section>
         </div>
-        <h3>Resultado:</h3>
-        <input type="text" id="resultado">
-        <br/>
-        <br/>
-        <div class="triple">
-            <button onclick="redondeo()">round</button>
-            <button onclick="piso()">floor</button>
-            <button onclick="techo()">ceil</button>
-        </div>
-    </body>
+    </main>
+
+    <script>
+        function toggleCalcMode() {
+            const card = document.getElementById('calcCard');
+            const adv = document.getElementById('advancedSection');
+            const label = document.getElementById('modeLabel');
+            const isCompact = adv.classList.toggle('hidden-mode');
+            label.textContent = isCompact ? 'Ver Avanzada' : 'Modo Compacto';
+        }
+        // Mobile default: compact mode
+        if (window.innerWidth <= 600) {
+            document.getElementById('advancedSection').classList.add('hidden-mode');
+            document.getElementById('modeLabel').textContent = 'Ver Avanzada';
+        }
+    </script>
+</body>
 </html>
